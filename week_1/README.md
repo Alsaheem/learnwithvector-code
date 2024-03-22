@@ -31,7 +31,7 @@ touch ~/.gitignore_global
 
 Others important Talks
 
-Talk about autosave and timeline on vscode
-Talk about vstodo on vscode
-Talk about codeshare https://codeshare.io
-Talk about privnote https://privnote.com
+- autosave and timeline on vscode
+- vstodo on vscode
+- codeshare https://codeshare.io
+- privnote https://privnote.com
