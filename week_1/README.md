@@ -1,4 +1,4 @@
-# Automating Your Local Environment
+# Automating Your Local Environment for better Productivity
 
 you would need either .zshrc or .bashrc depending on which shell you are using.
 
