@@ -1,5 +1,7 @@
 # Automating Your Local Environment
 
+you would need either .zshrc or .bashrc depending on which shell you are using.
+
 ## Working with aliases
 
 - Working with kubernetes clusters and docker
