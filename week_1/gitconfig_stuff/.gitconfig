@@ -1,0 +1,7 @@
+[push]
+	followTags = true
+[user]
+	name = alsaheem
+	email = adebisiayomide@gmail.com
+[core]
+	excludesfile = /Users/ayomide.adebisi/.gitignore_global
