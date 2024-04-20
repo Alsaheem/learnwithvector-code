@@ -1,5 +1,10 @@
 # Aliases
 
+# python
+
+alias createvenv="python3 -m venv venv"
+alias activate="source ./venv/bin/activate"
+
 # Docker
 
 alias freedocker="docker image prune -a -f"
@@ -8,16 +13,17 @@ alias freedocker="docker image prune -a -f"
 
 alias k='kubectl'
 alias kgpo='kubectl get pod'
-alias kgps='kubectl get pods'
-alias kdnode="kubectl describe node"
 alias knodes="kubectl get nodes"
 alias kservices="kubectl get services"
-alias kwide="kubectl get pods -o wide"
-alias klabels="kubectl get pods --show-labels"
 
-# python
-alias createvenv="python3 -m venv venv"
-alias activate="source ./venv/bin/activate"
+alias grafana="kubectl -n monitoring port-forward svc/monitoring-kube-prometheus-grafana 8080:80"
+alias prometheus="kubectl -n monitoring port-forward svc/monitoring-kube-prometheus-prometheus 9090:9090"
+alias alertmanager="kubectl -n monitoring port-forward svc/monitoring-kube-prometheus-alertmanager 9093:9093"
+alias kibana="kubectl -n monitoring port-forward svc/monitoring-kibana-kibana 10100:5601"
+alias kiali="kubectl port-forward svc/kiali 20001:20001 -n istio-system"
+alias jaeger="kubectl -n monitoring port-forward svc/monitoring-jaeger-query 16686:80"
+
+alias monitoring="grafana & prometheus & alertmanager & kibana & kiali & jaeger &"
 
 # AWS
 alias awsaccountid="aws sts get-caller-identity --query Account --output text"
@@ -27,7 +33,6 @@ alias listdevs3files="aws s3 ls s3://adebisiayomide.com/"
 
 # AWS postgres
 alias pginstance="aws ec2 describe-instances --filter Name=tag:eks:nodegroup-name,Values=eksdemo-dev-common --query \"Reservations[0].Instances[0].InstanceId\" --output text --filter Name=instance-state-name,Values=running"
-
 
 # GCP
 gcpdevauth="gcloud config set project <gcp-project-id>"
