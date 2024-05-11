@@ -2,19 +2,25 @@ import "./App.css";
 import React, { useState, useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
+import Loading from "./loading";
 
 function App() {
   // Initialize heistData as null or as an appropriate structure
   const [heistData, setHeistData] = useState(null);
   const [show, setShow] = useState(false);
+  const [loading, setLoading] = useState(false);
   const handleClose = () => setShow(false);
 
   useEffect(() => {
     console.log("UseEffect being called...");
   }, []); // Empty dependency array means this runs only once
 
+  const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
+
   const fetchHeist = () => {
     console.log("Fetching heist");
+    setLoading(true);
+    sleep(4000);
     fetch("https://catfact.ninja/fact")
       .then((res) => {
         return res.json();
@@ -46,7 +52,7 @@ function App() {
           <Modal.Title>Heist started</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Heist started ... No one can catch you now !!!
+          Heist started ... Make sure you keep your lips sealed !!!
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
@@ -94,13 +100,23 @@ function App() {
         </div>
       </nav>
       <div className="text-center mt-4">
-        <button
-          onClick={() => fetchHeist()}
-          type="button"
-          className="btn btn-outline-primary btn-lg mb-3"
-        >
-          Fetch random heist plan
-        </button>
+        {heistData == null ? (
+          <button
+            onClick={() => fetchHeist()}
+            type="button"
+            className="btn btn-outline-primary btn-lg mb-3"
+          >
+            Fetch random heist plan
+          </button>
+        ) : (
+          <button
+            onClick={() => setHeistData(null)}
+            type="button"
+            className="btn btn-outline-danger btn-lg mb-3"
+          >
+            Stop Heist...Plan failed
+          </button>
+        )}
       </div>
       <div className="container">
         <div className="row">
@@ -108,9 +124,23 @@ function App() {
             <div className="card">
               {heistData == null ? (
                 <div className="card-body">
-                  <div className="alert alert-info" role="alert">
-                    A simple danger alert—check it out!
-                  </div>
+                  <>
+                    {loading === true ? (
+                      <Loading />
+                    ) : (
+                      <>
+                        <div className="alert alert-info" role="alert">
+                          No Heist has been started Click the above button to
+                          start!
+                        </div>
+                        <img
+                          src="https://images.firstpost.com/wp-content/uploads/2020/12/money-heist.jpg"
+                          alt="HappyFace"
+                          style={{ minWidth: "100%" }}
+                        />
+                      </>
+                    )}
+                  </>
                 </div>
               ) : (
                 <div className="card-body">
